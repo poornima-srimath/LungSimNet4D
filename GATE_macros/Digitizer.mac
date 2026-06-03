@@ -1,0 +1,12 @@
+/gate/digitizer/Singles/insert adder
+/gate/digitizer/Singles/insert blurring
+/gate/digitizer/Singles/blurring/setResolution 0.1
+
+/gate/digitizer/Singles/blurring/setEnergyOfReference 140.5 keV
+/gate/digitizer/Singles/insert spblurring
+/gate/digitizer/Singles/spblurring/setSpresolution 3 mm
+
+##/gate/digitizer/Singles/insert thresholder
+##/gate/digitizer/Singles/thresholder/setThreshold 126 keV
+##/gate/digitizer/Singles/insert upholder
+##/gate/digitizer/Singles/upholder/setUphold 154 keV

@@ -1,0 +1,26 @@
+# Ignore generated and large artifact directories
+GateTools/
+generated/
+generated_backup/
+mac/
+mesh50XCAT_WholeBody/
+models/
+paper_figures/
+results/
+
+# Ignore large voxel and simulation files
+VoxWholeBody_658x280x1764.i33
+
+# Ignore variant 0001 output projections and ROOT file
+variant_0001*.png
+variant_0001.root
+
+# Ignore local Python virtual environment
+.lungsimnet4d_venv/
+variant_0004_xy_projection.png
+variant_0004_xz_projection.png
+variant_0004_yz_projection.png
+variant_0004.png
+variant_0004.root
+LungSimNet4D_artifacts.zip
+.DS_Store

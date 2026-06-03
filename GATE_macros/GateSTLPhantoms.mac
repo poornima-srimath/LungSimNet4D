@@ -1,0 +1,169 @@
+########################### VISUALISATION ###########################
+/vis/disable
+##/control/execute visu.mac
+/vis/viewer/list
+
+############################### WORLD ################################
+/gate/world/geometry/setXLength 2000. cm
+/gate/world/geometry/setYLength 2000. cm
+/gate/world/geometry/setZLength 2000. cm
+/gate/world/placement/setTranslation 0.0 0.0 0.0  cm
+/gate/world/vis/forceWireframe
+/gate/world/vis/setVisible 0
+/gate/world/vis/setColor green
+
+/gate/world/daughters/name SPECThead
+/gate/world/daughters/insert box
+/gate/SPECThead/setMaterial Air
+/gate/SPECThead/geometry/setXLength 1900.0 cm
+/gate/SPECThead/geometry/setYLength 1900.0 cm
+/gate/SPECThead/geometry/setZLength 1900.0 cm
+/gate/SPECThead/placement/setTranslation 0.0 0.0 0.0  cm
+/gate/SPECThead/vis/setColor yellow
+
+/gate/SPECThead/daughters/name crystal
+/gate/SPECThead/daughters/insert sphere
+/gate/SPECThead/setMaterial NaI
+/gate/SPECThead/geometry/setRmin 100.0 cm
+/gate/SPECThead/geometry/setRmax 101.0 cm
+/gate/SPECThead/geometry/setPhiStart 0.0 deg
+/gate/SPECThead/geometry/setDeltaPhi 360.0 deg
+/gate/SPECThead/geometry/setThetaStart 0.0 deg
+/gate/SPECThead/geometry/setDeltaTheta 180.0 deg
+/gate/SPECThead/placement/setTranslation 0.0 0.0 0.0 mm
+/gate/SPECThead/vis/setVisible 1
+/gate/SPECThead/vis/setColor yellow
+/gate/SPECThead/vis/forceSolid
+
+/gate/systems/SPECThead/crystal/attach crystal
+/gate/systems/SPECThead/describe
+/gate/crystal/attachCrystalSD
+
+# All phantom internal structures are part of the Body volume.
+/gate/SPECThead/daughters/name Body
+/gate/SPECThead/daughters/insert tessellated
+/gate/Body/geometry/setPathToSTLFile PATH_TO/WholeBody_Body.stl
+/gate/Body/placement/setTranslation 0.0   0.0   0.0  cm
+/gate/Body/setMaterial Water
+/gate/Body/vis/setColor blue
+/gate/Body/vis/forceSolid
+/gate/Body/attachPhantomSD
+
+/gate/Body/daughters/name Lung
+/gate/Body/daughters/insert tessellated
+/gate/Lung/geometry/setPathToSTLFile PATH_TO/WholeBody_Lungs.stl
+/gate/Lung/placement/setTranslation 0.0   0.0   0.0  cm
+/gate/Lung/setMaterial Lung
+/gate/Lung/vis/setColor blue
+/gate/Lung/vis/forceSolid
+/gate/Lung/attachPhantomSD
+
+#Bronchi Tree is a subvolume of the Lung volume
+/gate/Lung/daughters/name Bronchi
+/gate/Lung/daughters/insert tessellated
+/gate/Bronchi/geometry/setPathToSTLFile PATH_TO/WholeBody_BronchiTree.stl
+/gate/Bronchi/placement/setTranslation 0.0   0.0   0.0  cm
+/gate/Bronchi/setMaterial Air
+/gate/Bronchi/vis/setColor blue
+/gate/Bronchi/vis/forceSolid
+/gate/Bronchi/attachPhantomSD
+
+/gate/Body/daughters/name Skeleton
+/gate/Body/daughters/insert tessellated
+/gate/Skeleton/geometry/setPathToSTLFile PATH_TO/WholeBody_Skeleton.stl
+/gate/Skeleton/placement/setTranslation 0.0   0.0   0.0  cm
+/gate/Skeleton/setMaterial SpineBone
+/gate/Skeleton/vis/setColor cyan
+/gate/Skeleton/vis/forceSolid
+/gate/Skeleton/attachPhantomSD
+
+/gate/Body/daughters/name Brain
+/gate/Body/daughters/insert tessellated
+/gate/Brain/geometry/setPathToSTLFile PATH_TO/WholeBody_Brain.stl
+/gate/Brain/placement/setTranslation 0.0   0.0   0.0  cm
+/gate/Brain/setMaterial Brain
+/gate/Brain/vis/setColor cyan
+/gate/Brain/vis/forceSolid
+/gate/Brain/attachPhantomSD
+
+/gate/Body/daughters/name Liver
+/gate/Body/daughters/insert tessellated
+/gate/Liver/geometry/setPathToSTLFile PATH_TO/WholeBody_Liver.stl
+/gate/Liver/placement/setTranslation 0.0   0.0   0.0  cm
+/gate/Liver/setMaterial Liver
+/gate/Liver/vis/setColor cyan
+/gate/Liver/vis/forceSolid
+/gate/Liver/attachPhantomSD
+
+/gate/Body/daughters/name AirCavity
+/gate/Body/daughters/insert tessellated
+/gate/AirCavity/geometry/setPathToSTLFile PATH_TO/WholeBody_AirCavity.stl
+/gate/AirCavity/placement/setTranslation 0.0   0.0   0.0  cm
+/gate/AirCavity/setMaterial Air
+/gate/AirCavity/vis/setColor cyan
+/gate/AirCavity/vis/forceSolid
+/gate/AirCavity/attachPhantomSD
+
+############################# Digitizer ##############################
+/control/execute Digitizer.mac
+
+############################## PHYSICS ###############################
+/control/execute Physics.mac
+
+##############################  C U T S
+#/gate/physics/Gamma/SetCutInRegion      SPECThead 0.1 cm
+#/gate/physics/Electron/SetCutInRegion   SPECThead 0.1 cm
+
+/gate/run/initialize
+
+# SPHERICAL SOURCE
+#/gate/source/addSource SphereSource gps
+#/gate/source/SphereSource/gps/type Volume
+#/gate/source/SphereSource/gps/shape Sphere
+#/gate/source/SphereSource/gps/radius 10.5 cm
+#/gate/source/SphereSource/gps/centre 0.0 0.0 0.0 cm
+#/gate/source/SphereSource/gps/angtype iso
+#/gate/source/SphereSource/gps/particle gamma
+#/gate/source/SphereSource/gps/energy 140.5 keV
+#/gate/source/SphereSource/setActivity 1000 Bq
+
+
+# VOXELIZED SOURCE
+/gate/source/addSource                                            VoxSource voxel
+/gate/source/VoxSource/reader/insert                              image
+/gate/source/VoxSource/imageReader/translator/insert              linear
+/gate/source/VoxSource/imageReader/linearTranslator/setScale      0.001 Bq
+/gate/source/VoxSource/imageReader/readFile PATH_TO/VoxWholeBody_658x280x1764.h33
+/gate/source/VoxSource/imageReader/verbose 1
+/gate/source/VoxSource/gps/particle gamma
+/gate/source/VoxSource/gps/angtype iso
+/gate/source/VoxSource/gps/energy 140.5 keV
+## THE DEFAULT POSITION OF THE VOXELIZED SOURCE IS IN THE 1ST QUARTER
+## SO THE VOXELIZED SOURCE HAS TO BE SHIFTED OVER HALF ITS DIMENSION IN THE NEGATIVE DIRECTION ON EACH AXIS
+/gate/source/hof_brain/setPosition -329.0 -140.0 -882.0 mm
+/gate/source/list
+############################### OUTPUT ###############################
+
+## ROOT OUTPUT
+/gate/output/root/enable
+/gate/output/root/setFileName OutputFile
+
+############################# VERBOSITY ##############################
+/control/verbose 0
+/run/verbose 0
+/gate/application/verbose 0
+/event/verbose 0
+/tracking/verbose 0
+
+############################### RANDOM ###############################
+/gate/random/setEngineName MersenneTwister
+/gate/random/setEngineSeed auto
+/gate/random/verbose 1
+
+############################### START ################################
+/gate/application/setTimeSlice      1.0  s
+/gate/application/setTimeStart      0.0  s
+/gate/application/setTimeStop       1.0  s
+
+/gate/application/startDAQ
+

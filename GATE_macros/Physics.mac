@@ -1,0 +1,45 @@
+/gate/physics/addProcess PhotoElectric
+/gate/physics/processes/PhotoElectric/setModel LivermoreModel
+
+/gate/physics/addProcess GateLowEnergyComptonFDPin
+
+#/gate/physics/addProcess Compton
+#/gate/physics/processes/Compton/setModel LivermoreComptonModifiedModelFDPin
+#/gate/physics/processes/Compton/setModel PenelopeModel
+#/gate/physics/processes/Compton/setModel StandardModel
+#/gate/physics/processes/Compton/setModel LivermoreModel
+
+/gate/physics/addProcess GateLowEnergyRayleighFDPin
+#/gate/physics/addProcess RayleighScattering
+#/gate/physics/processes/RayleighScattering/setModel PenelopeModel
+
+/gate/physics/addProcess ElectronIonisation
+/gate/physics/processes/ElectronIonisation/setModel StandardModel e-
+
+/gate/physics/addProcess Bremsstrahlung
+/gate/physics/processes/Bremsstrahlung/setModel StandardModel e-
+
+#/gate/physics/addProcess eMultipleScattering e-
+
+/gate/physics/processList Enabled
+/gate/physics/processList Initialized
+
+##/gate/physics/Gamma/SetCutInRegion      world  1 keV
+##/gate/physics/Electron/SetCutInRegion   world  1 keV
+##/gate/physics/Positron/SetCutInRegion   world  1 keV
+
+##/gate/physics/Gamma/SetCutInRegion      SPECThead  1 keV
+##/gate/physics/Electron/SetCutInRegion   SPECThead  1 keV
+##/gate/physics/Positron/SetCutInRegion   SPECThead  1 keV
+
+##/gate/physics/Gamma/SetCutInRegion      module  1 keV
+##/gate/physics/Electron/SetCutInRegion   module  1 keV
+##/gate/physics/Positron/SetCutInRegion   module  1 keV
+
+##/gate/physics/Gamma/SetCutInRegion      Alu  1 keV
+##/gate/physics/Electron/SetCutInRegion   Alu  1 keV
+##/gate/physics/Positron/SetCutInRegion   Alu  1 keV
+
+##/gate/physics/processes/PhotoElectric/setAugerElectron true
+##/gate/physics/processes/PhotoElectric/setDeltaRayCut 1 keV
+##/gate/physics/processes/PhotoElectric/setXRayCut 1 keV

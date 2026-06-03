@@ -1,0 +1,30 @@
+#	V I S U A L I S A T I O N
+/vis/open OGLS
+
+/vis/viewer/reset
+/vis/viewer/set/viewpointThetaPhi 90 0
+#vis/viewer/set/viewpointThetaPhi -90 360
+#/vis/viewer/set/viewpointThetaPhi 0 0
+#/vis/viewer/set/viewpointThetaPhi 45 45
+#/vis/viewer/set/viewpointThetaPhi 45 30
+
+
+#vis/viewer/panTo 0 0 cm  # for 90 90
+/vis/viewer/zoom 1.2
+/vis/drawVolume
+
+/tracking/storeTrajectory
+/tracking/storeTrajectory           1
+/vis/scene/add/trajectories
+#/vis/scene/endOfEventAction         accumulate
+
+/vis/scene/endOfEventAction accumulate 1000
+/vis/viewer/update
+/vis/viewer/refresh
+
+/vis/verbose 1
+
+/vis/viewer/set/background white
+
+/vis/ogl/set/displayListLimit 10000000
+/vis/scene/add/axes 0 0 0 50 cm
