@@ -42,3 +42,13 @@ Dataset Size
 1044 Anatomical Variants Generated
 
 10 Voxelized Phantoms Used For Validation
+
+Repository Validation Scope
+
+The validation artifacts included in this repository demonstrate
+end-to-end framework functionality using a representative subset
+of generated phantoms.
+
+Benchmark performance metrics reported in the manuscript were
+obtained through separate experimental evaluations and are
+reported independently from the framework validation subset.
