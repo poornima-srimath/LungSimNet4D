@@ -369,6 +369,100 @@ Hits->Scan("posX:posY:posZ","","",20)
 
 ---
 
+# LUNA16 External Validation Pipeline
+
+LungSimNet4D includes an external validation workflow using the publicly available LUNA16 dataset derived from LIDC-IDRI CT studies.
+
+## Step 1: Download LUNA16 Dataset (part of LungSimNet4D Figshare link)
+
+Place the downloaded LUNA16 dataset under:
+
+```text
+luna16/
+├── annotations.csv
+├── seg-lungs-LUNA16/
+```
+
+---
+
+## Step 2: Generate Nodule Classification Patches
+
+```bash
+python src/training/luna16/patch_builder.py
+```
+
+Creates:
+
+```text
+luna16_patches/
+├── positive/
+├── negative/
+├── luna16_patch_manifest.csv
+└── luna16_scan_splits.csv
+```
+
+Outputs:
+
+- Positive nodule patches
+- Negative control patches
+- Train / Validation / Test splits
+
+---
+
+## Step 3: Train MONAI ResNet-3D Classifier
+
+```bash
+python src/training/luna16/train_luna16_monai_resnet3d.py
+```
+
+Outputs:
+
+```text
+models/luna16_resnet3d.pt
+
+results/luna16/
+├── metrics.csv
+├── loss.png
+├── auc.png
+└── confusion_matrix.png
+```
+
+Metrics:
+
+- Accuracy
+- Precision
+- Recall
+- F1 Score
+- ROC-AUC
+
+---
+
+## Step 4: External Validation
+
+```bash
+python src/training/luna16/validate_luna16_resnet3d.py
+```
+
+Outputs:
+
+```text
+results/luna16_validation/
+├── luna16_validation_metrics.csv
+├── luna16_confusion_matrix.png
+├── luna16_roc_curve.png
+├── luna16_prediction_1.png
+└── luna16_prediction_2.png
+```
+
+Outputs:
+
+- ROC Curve
+- Confusion Matrix
+- Prediction Visualizations
+- Validation Metrics
+
+---
+
 # Reproducibility
 
 The repository includes:
