@@ -73,7 +73,7 @@ src/
 ├── dataset_builder/
 ├── quality_control/
 ├── training/
-│   ├── sgementation/
+│   ├── segmentation/
 │   └── classification/
 ├── gate/
 
