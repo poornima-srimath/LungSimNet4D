@@ -398,4 +398,4 @@ This project is released under the MIT License. See the LICENSE file for details
 
 If you use LungSimNet4D in academic work, please cite:
 
-Poognima G., et al. "LungSimNet4D: An Anatomy-Informed Synthetic Thoracic Imaging Framework for Lung Cancer Research." (Under Review).
+Poornima G., et al. "LungSimNet4D: An Anatomy-Informed Synthetic Thoracic Imaging Framework for Lung Cancer Research." (Under Review).
