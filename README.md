@@ -51,15 +51,19 @@ After downloading:
 ```bash
 unzip LungSimNet4D_artifacts.zip
 ```
-Place the extracted folders at the project root,
 
+Place the extracted folders at the project root:
+
+```text
 LungSimNet4D/
 ├── generated/
+├── luna16/
 ├── models/
 ├── results/
 ├── paper_figures/
 ├── src/
 └── README.md
+```
 
 ---
 
