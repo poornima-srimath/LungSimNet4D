@@ -24,3 +24,7 @@ variant_0004.png
 variant_0004.root
 LungSimNet4D_artifacts.zip
 .DS_Store
+
+luna16_validation/
+luna16/*
+luna16_patches/*
